@@ -4,6 +4,8 @@ import nltk
 
 def syllableCounter(word):
 
+    original = word[0:]
+    
     word = word.lower()
     
     # Found that syllables are essentially found by looking for the transition from a consonant to a vowel
@@ -22,7 +24,13 @@ def syllableCounter(word):
         
     # While the word has at least one letter
     while len(word) > 0:
-
+        
+        #print(word)
+        
+        if word == "the":
+            
+            tally += 1
+        
         # Is the next letter (the first letter in the current state of "word") vowel?
         currBool = word[0] in vowels
 
@@ -37,6 +45,11 @@ def syllableCounter(word):
             
                 tally += 1
             # print("increased")
+            
+        if word[1:] == "ed" and len(original) > 3:
+        
+            if word[0] not in ["d", "t"]:
+                tally -= 1
 
         prevBool = currBool    
 
